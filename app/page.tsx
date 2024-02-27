@@ -9,8 +9,10 @@ import {
 
 export default function Home() {
     return (
-        <main className="flex min-h-screen items-center justify-center">
+        <div className="flex min-h-screen items-center justify-center">
             <div className="relative">
+                <div className="my-10 bg-blue-300 p-2 rounded-lg"><Link href="/about">GO TO ABOUT PAGE</Link></div>
+
                 <Image
                     className="relative mx-auto dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
                     src="/next.svg"
@@ -43,6 +45,6 @@ export default function Home() {
                 </div>
 
             </div>
-        </main>
+        </div>
     )
 }
