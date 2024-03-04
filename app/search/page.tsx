@@ -3,7 +3,6 @@
 import Basecontent from "@/components/basecontent"
 import Image from "next/image"
 import Link from "next/link"
-import parse from "html-react-parser";
 import { useQuery } from "@tanstack/react-query"
 import Skeleton from "@/components/Skeleton";
 import { getData } from "@/lib/services";
@@ -16,11 +15,10 @@ import {
     Dialog,
     DialogContent,
     DialogClose,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import { TbFaceIdError } from "react-icons/tb";
+
 
 function ContentMusic() {
     const searchParams = useSearchParams()
@@ -67,6 +65,8 @@ function ContentMusic() {
     }
     const dataContent = data?.data.results
 
+    console.log(dataContent)
+
     return (
         <div className="bg-white min-h-screen">
             <div className="sticky top-0">
@@ -95,7 +95,6 @@ function ContentMusic() {
                                             />
                                             <DialogClose asChild>
                                                 <input type="submit" value="Search" className="py-3 px-5 rounded-full text-white bggradient-cs cursor-pointer" />
-
                                             </DialogClose>
                                         </div>
                                     </form>
@@ -122,11 +121,11 @@ function ContentMusic() {
                                                             <Link href={`${item.trackViewUrl}`} target="_blank" className="text-[14px] font-bold capitalize">{item.collectionName}</Link>
                                                         </div>
                                                         <div className="flex justify-between w-full items-center">
-                                                            <div className="bg-[#10b981] text-[10px] text-white rounded-xl px-3 py-1">POP</div>
+                                                            <div className="bg-[#10b981] text-[10px] text-white rounded-xl px-3 py-1 uppercase">{item.kind}</div>
                                                             {
                                                                 item.trackPrice && <div className="flex gap-1">
                                                                     <Image src="/images/currency-dollar.svg" alt="currency" width={18} height={18} />
-                                                                    <div className="text-[#f5b014] text-[12px] font-bold">{item.trackPrice}</div>
+                                                                    <div className="text-[#f5b014] text-[12px] font-bold ">{item.trackPrice}</div>
                                                                 </div>
                                                             }
 
@@ -141,7 +140,15 @@ function ContentMusic() {
                                     <div className="bg-[#e2e8f0]  hover:bg-slate-400 hover:text-white cursor-pointer rounded-3xl py-3 px-10 text-center inline-block mx-auto" onClick={handleLoadMore}>Load More</div>
                                 </div>
                             </div>
-                            : <div className="wrapper text-center py-20">Data Not Found</div>
+                            : <div className="wrapper text-center py-20">
+                                <div className="flex justify-center">
+                                    <div className="text-center">
+                                        <TbFaceIdError className="mx-auto text-8xl text-red-500" />
+                                        <h3 className="text-2xl block mb-7">Data Not Found</h3>
+                                        <Link href="/" className="bggradient-cs text-white px-11 mt-9 py-3 rounded-full">Home</Link>
+                                    </div>
+                                </div>
+                            </div>
                     }
                 </div>
             </div>
