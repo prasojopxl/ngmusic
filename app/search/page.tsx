@@ -51,7 +51,10 @@ function ContentMusic() {
     if (isLoading) {
         return (
             <div className="wrapper">
-                <Skeleton width="100%" height="300px" spaceBottom="5px" />
+                <Skeleton width="100%" height="100px" spaceBottom="5px" />
+                <Skeleton width="100%" height="100px" spaceBottom="5px" />
+                <Skeleton width="100%" height="100px" spaceBottom="5px" />
+                <Skeleton width="100%" height="100px" spaceBottom="5px" />
             </div>
         )
     }
