@@ -11,7 +11,7 @@ import ErrorNetwork from "@/components/errorNetwork";
 import { useState } from "react";
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation';
-
+import { Suspense } from 'react'
 import {
     Dialog,
     DialogContent,
@@ -150,7 +150,9 @@ export default function SearchPage() {
 
     return (
         <Basecontent>
-            <ContentMusic />
+            <Suspense>
+                <ContentMusic />
+            </Suspense>
         </Basecontent>
     )
 }
