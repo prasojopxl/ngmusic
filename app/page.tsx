@@ -1,50 +1,35 @@
+"use client"
+import Basecontent from "@/components/basecontent"
 import Image from 'next/image'
-import Link from "next/link"
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion"
+import { useRouter } from 'next/navigation';
+import { useState } from "react";
+
 
 export default function Home() {
-    return (
-        <div className="flex min-h-screen items-center justify-center">
-            <div className="relative">
-                <div className="my-10 bg-blue-300 p-2 rounded-lg"><Link href="/about">GO TO ABOUT PAGE</Link></div>
+    const [title, setTitle] = useState("")
+    const router = useRouter();
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        router.push(`/search?term=${title}`);
+    }
 
-                <Image
-                    className="relative mx-auto dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-                    src="/next.svg"
-                    alt="Next.js Logo"
-                    width={180}
-                    height={37}
-                    priority
-                />
-                <div className="relative">
-                    <div className="w-full p-2 rounded-lg">
-                        <Accordion type="single" collapsible>
-                            <AccordionItem value="item-1">
-                                <AccordionTrigger>Is it accessible?</AccordionTrigger>
-                                <AccordionContent>
-                                    Yes. It adheres to the WAI-ARIA design pattern.
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
-                    </div>
-                    <div className=" w-full p-2 rounded-lg">
-                        <Accordion type="single" collapsible>
-                            <AccordionItem value="item-2">
-                                <AccordionTrigger>Is it accessible?</AccordionTrigger>
-                                <AccordionContent>
-                                    Yes. It adheres to the WAI-ARIA design pattern.
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
+    return (
+        <Basecontent>
+            <form onSubmit={handleSubmit}>
+                <div className="flex min-h-screen items-center justify-center mainbg flex-col">
+                    <Image src="/images/logo.svg" width={73} height={83} alt="logo" />
+                    <div className="absolute bottom-[30px] flex flex-col wrapper gap-5">
+                        <input
+                            type="text"
+                            placeholder="Artist / Album / Title"
+                            className="w-full rounded-full py-3 px-5 text-center"
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                        <input type="submit" value="Search" className="py-3 px-5 rounded-full text-white" />
                     </div>
                 </div>
+            </form>
 
-            </div>
-        </div>
+        </Basecontent>
     )
 }
