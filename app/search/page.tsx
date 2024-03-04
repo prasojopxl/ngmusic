@@ -15,6 +15,7 @@ import { Suspense } from 'react'
 import {
     Dialog,
     DialogContent,
+    DialogClose,
     DialogDescription,
     DialogHeader,
     DialogTitle,
@@ -38,7 +39,7 @@ function ContentMusic() {
     }
 
     const getQuery = async () => {
-        return await getData(`/search?term=${term}+&limit=${limit}`)
+        return await getData(`/search?term=${title !== "" ? title : term}+&limit=${limit}`)
     }
     const handleLoadMore = () => {
         setLimit((prevLimit) => prevLimit + 2);
@@ -80,7 +81,7 @@ function ContentMusic() {
                             </Link>
                             <Dialog>
                                 <DialogTrigger>
-                                    <Image src="/images/search.svg" alt="search" width={16} height={16} />
+                                    <Image src="/images/search.svg" alt="search" width={16} height={16} className="cursor-pointer" />
                                 </DialogTrigger>
                                 <DialogContent>
                                     <form onSubmit={handleSubmit}>
@@ -92,7 +93,10 @@ function ContentMusic() {
                                                 className="w-full rounded-full py-3 px-5 text-center"
                                                 onChange={(e) => setTitle(e.target.value)}
                                             />
-                                            <input type="submit" value="Search" className="py-3 px-5 rounded-full text-white bggradient-cs" />
+                                            <DialogClose asChild>
+                                                <input type="submit" value="Search" className="py-3 px-5 rounded-full text-white bggradient-cs cursor-pointer" />
+
+                                            </DialogClose>
                                         </div>
                                     </form>
 
